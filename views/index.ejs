@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css" media="screen">
+        #editor { 
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <H1 style="margin: 5%;text-align: center">WELCOME TO TRUNTRUN</H1>
+    <p>One destination for all your codes</p>
+    <form action="runCode" method="post">
+    <!-- <input id ="hiddencode" name="code" type=""> -->
+    <textarea name="code" id="hiddencode" cols="300" hidden rows="5000"></textarea>
+    Select Language :<select name="lang" id="lang" onclick="EditorMode()">
+        <!-- <option value="C" onclick="EditorMode()">C</option> -->
+        <!-- <option value="C++" onclick="EditorMode()">C++</option> -->
+        <option value="java" onclick="EditorMode()">Java</option>
+        <option value="python" onclick="EditorMode()">Python</option>
+
+    </select>
+    <div style="margin-top: 25%"></div>
+    <p style="margin-left: 10%;">Std Inputs :</p> <textarea style="margin-left: 10%" rows="10" cols="100" placeholder="Enter Inputs" name="input" id="input"></textarea>
+    <input type="submit" onclick="submitted()">
+    </form>
+    <div id="editor" style="margin: 10% ;margin-top: 20%;">
+
+    </div>
+    <br><div>   <div id="result" style="margin-top: 2%;margin-left:10%;position: relative;">Results<br><%= data %></div>
+    </div>
+ 
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    
+    function EditorMode(){
+    var lang = document.getElementById("lang").value;
+    console.log(lang);
+    if(lang==="C")
+    editor.session.setMode("ace/mode/C");
+    if(lang==="C++")
+    editor.session.setMode("ace/mode/cpp");
+    if(lang==="Python")
+    editor.session.setMode("ace/mode/python");
+    if(lang==="java")
+    editor.session.setMode("ace/mode/java");
+
+    }
+
+    editor.resize();
+    function submitted(err){
+    var result=document.getElementById("result");
+    var hiddencode=document.getElementById("hiddencode");
+    hiddencode.value=editor.getValue();
+    result.innerHTML+=editor.getValue();
+    var code = editor.getValue();
+    console.log("sadasd"+code);
+    }
+   
+</script>
+</html>
